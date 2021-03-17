@@ -1,0 +1,16 @@
+[package]
+name = "example"
+version = "0.1.0"
+authors = ["suve <veg@svgames.pl>"]
+edition = "2018"
+
+[[bin]]
+name = "rpn"
+path = "src/main.rs"
+
+[lib]
+name = "rpn"
+path = "src/lib.rs"
+
+[dependencies]
+rust-gmp = "~0.5.0"
