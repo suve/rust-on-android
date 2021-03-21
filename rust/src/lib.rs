@@ -1,14 +1,25 @@
-use std::fmt::Debug;
+#[cfg(target_os = "android")]
+#[path = "android.rs"]
+mod android;
+
+use std::fmt::{Debug, Display, Error as FmtError, Formatter};
 use std::vec::Vec;
 
 use gmp::mpz::Mpz;
+use thiserror::Error as DeriveError;
 
-#[derive(Debug)]
+#[derive(DeriveError, Debug)]
 pub enum RpnError {
 	FailedToParseNumber,
 	NotEnoughOperands,
 	NotEnoughOperators,
 	Unknown,
+}
+
+impl Display for RpnError {
+	fn fmt(&self, f: &mut Formatter) -> Result<(), FmtError> {
+		write!(f, "{:?}", self)
+	}
 }
 
 pub struct BigNum {
@@ -33,6 +44,12 @@ impl BigNum {
 
 	pub fn as_str(&self) -> &str {
 		&self.strval
+	}
+}
+
+impl Display for BigNum {
+	fn fmt(&self, f: &mut Formatter) -> Result<(), FmtError> {
+		write!(f, "{}", self.strval)
 	}
 }
 
