@@ -8,10 +8,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import pl.svgames.blog.RustOnAndroid.Result;
+import pl.svgames.blog.RustOnAndroid.RpnCalculator;
+
 public class MainActivity extends AppCompatActivity {
 	private Button button;
 	private EditText input;
 	private TextView resultBox;
+
+	private int colourRed;
+	private int colourGreen;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +28,20 @@ public class MainActivity extends AppCompatActivity {
 		input = (EditText)findViewById(R.id.exprInput);
 		resultBox = (TextView)findViewById(R.id.exprResult);
 
+		colourRed = Color.parseColor("#AA0000");
+		colourGreen = Color.parseColor("#007F00");
+
 		button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				String expr = input.getText().toString();
-				resultBox.setText(expr);
+				Result result = RpnCalculator.rpn(expr);
+				if(result.isOk()) {
+					resultBox.setTextColor(colourGreen);
+					resultBox.setText(result.getValue());
+				} else {
+					resultBox.setTextColor(colourRed);
+					resultBox.setText(result.getError());
+				}
 			}
 		});
 	}
