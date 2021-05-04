@@ -47,9 +47,6 @@ while [[ "$#" -gt 0 ]]; do
 	elif [[ "$1" == "--libs-dir" ]]; then
 		LIBS_DIR="$(pwd)/$2"
 		shift 2
-	elif [[ "$1" == "--release" ]]; then
-		RELEASE="1"
-		shift 1
 	else
 		echo "build-librpn.sh: Unrecognized argument '$1'" >&2
 		exit 1

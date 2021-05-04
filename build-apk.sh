@@ -2,6 +2,12 @@
 
 set -eu -o pipefail
 
+# -- Check env vars.
+if [[ -z "${ANDROID_SDK_ROOT+isset}" ]]; then
+	echo 'build-apk.sh: The $ANDROID_SDK_ROOT environment variable is unset - unable to proceed' >&2
+	exit 10
+fi
+
 # -- Parse arguments.
 BUILD_DIR=""
 BUILD_MODE=""
@@ -38,7 +44,7 @@ fi
 mkdir -p "${BUILD_DIR}"
 
 if [[ -z "${BUILD_MODE}" ]]; then
-	echo "build-librpn.sh: You must specify the --build-mode" >&2
+	echo "build-apk.sh: You must specify the --build-mode" >&2
 	exit 1
 fi
 

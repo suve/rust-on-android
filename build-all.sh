@@ -3,13 +3,17 @@
 set -eu -o pipefail
 
 # -- Check env vars.
+if [[ -z "${ANDROID_SDK_ROOT+isset}" ]]; then
+	echo 'build-all.sh: The $ANDROID_SDK_ROOT environment variable is unset - unable to proceed' >&2
+	exit 10
+fi
 if [[ -z "${ANDROID_NDK_ROOT+isset}" ]]; then
 	echo 'build-all.sh: The $ANDROID_NDK_ROOT environment variable is unset - unable to proceed' >&2
-	exit 10
+	exit 11
 fi
 if [[ -z "${ANDROID_API+isset}" ]]; then
 	echo 'build-all.sh: The $ANDROID_API environment variable is unset - unable to proceed' >&2
-	exit 11
+	exit 12
 fi
 
 # -- Parse arguments.
