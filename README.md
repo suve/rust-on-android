@@ -6,6 +6,15 @@ Implements a very basic [Reverse Polish Notation](https://en.wikipedia.org/wiki/
 This README gives a quick rundown of the repo.
 If you want some more information, check out [the post on my blog](https://blog.svgames.pl/article/running-rust-on-android).
 
+**NOTE**: If you want a quick and easy solution,
+there is a [Rust plugin for Gradle](https://github.com/mozilla/rust-android-gradle) which makes the whole
+process rather trivial. For an example of how to use the plugin, you can check out
+the [example repo by ssrlive](https://github.com/ssrlive/rust_on_android).
+
+This repository contains a more low-level approach, where C and Rust compilers are directly called
+and all the stuff related to setting up cross-compilation, compiler flags, linker flags etc.
+is handled explicitly. Gradle is used pretty much only to glue everything together into an `.apk`.
+
 
 ## Requirements
 
